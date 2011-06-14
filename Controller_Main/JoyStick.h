@@ -1,13 +1,17 @@
 #ifndef JOYSTICK_H
 #define JOYSTICK_H
 
-class CJoyStick
+#include "Interfaces.h"
+
+class CJoyStick : public IJoyStick
 {
-  int m_iJoyStick_H_Value;
-  int m_iJoyStick_V_Value;
+  int m_JoyStick_H_Pin;
+  int m_JoyStick_V_Pin;
 public:
   CJoyStick(int aJoyStick_H_Pin, int aJoyStick_V_Pin);
-  ~CJoyStick();
+  int GetHValue();
+  int GetVValue();
 };
 
 #endif
+
