@@ -2,7 +2,7 @@
 #include "JoyStick.h"
 #include "JoyStickAdapter.h"
 #include "Interfaces.h"
-#include "Command.h"
+#include "Common.h"
 
 
 CJoyStickAdapter::CJoyStickAdapter(int aLeftHPin, int aLeftVPin, int aRightHPin, int aRightVPin)

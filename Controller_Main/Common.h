@@ -1,5 +1,5 @@
-#ifndef Command_H
-#define Command_H
+#ifndef Common_H
+#define Common_H
 
 #define VEHICLE_FORWARD 		201
 #define VEHICLE_BACKWARD 		211
@@ -10,5 +10,19 @@
 #define VEHICLE_SPIN_CLOCKWISE		261
 #define VEHICLE_SPIN_COUNTERCLOCKWISE	271
 #define VEHICLE_STOP			281
+
+#define MODE_VEHICLE	1
+#define MODE_SERVO	2
+
+#define BUTTON_1_PIN	5
+#define BUTTON_2_PIN	6
+#define BUTTON_3_PIN	7
+#define BUTTON_4_PIN	8
+
+class CWorkingMode
+{
+public:
+	static int ModeCode;
+};
 
 #endif
