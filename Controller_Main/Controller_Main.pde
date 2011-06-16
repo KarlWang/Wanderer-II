@@ -1,12 +1,15 @@
+#include <NewSoftSerial.h>
 #include "JoyStickAdapter.h"
 #include "cppfix.h"
 #include "Common.h"
 
 int CWorkingMode::ModeCode = MODE_VEHICLE;
 CJoyStickAdapter * pjsa;
+NewSoftSerial srlXBee(2, 3);
 
 void setup() {                
   Serial.begin(9600);
+	srlXBee.begin(9600);
   pjsa = new CJoyStickAdapter(A5, A0, A4, A1);
 	
 	pinMode(BUTTON_1_PIN, INPUT);
@@ -34,7 +37,7 @@ void loop() {
   switch(CWorkingMode::ModeCode)
   {
   case MODE_VEHICLE:
-    Serial.println(pjsa->GetCommand());
+    srlXBee.print(pjsa->GetCommand());
     delay(1000);
     break;
   case MODE_SERVO:
