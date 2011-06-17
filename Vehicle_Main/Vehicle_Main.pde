@@ -128,11 +128,12 @@ int GetSerialNumber()
 }
 
 void setup() {
-	Serial.begin(9600);
+  Serial.begin(9600);
   wandererServo.attach(11);
   wandererServo.write(90);
   delay(1000);
   KeepSweeping();
+/*  
   if ((curServoPos_L - 90) > (90 - curServoPos_R))
   {
     pwt->Turn(2, 1);
@@ -143,13 +144,14 @@ void setup() {
     pwt->Turn(1, 1);
     delay(500);
   }  
+*/  
 }
 
 void loop() {
   iComNum = GetSerialNumber();
-	Serial.print(pirs->GetDistanceVal());
+  Serial.print(pirs->GetDistanceVal());
   //work in auto mode
-  if (iComNum > 500)	
+  if (0)//(iComNum > 500)	
   {
     if (pirs->Obstructed(11))
     {
@@ -211,3 +213,14 @@ void loop() {
     }
   }
 }
+<<<<<<< HEAD
+=======
+
+/*
+*
+ * the end
+ *
+ */
+
+
+>>>>>>> remotes/origin/master
