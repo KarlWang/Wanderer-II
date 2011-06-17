@@ -9,11 +9,13 @@
 
 CWandererTrack * pwt = new CWandererTrack(7, 5, 6, 9, 8);
 CIRSensor * pirs = new CIRSensor(A0);
+pinMode(13, OUTPUT); //red
+pinMode(12, OUTPUT); //green
 
 Servo wandererServo;
 
-int CSettings::ModeCode = 1;
-int iComNum;
+int CSettings::SystemModeCode = SYSTEM_MODE_STANDBY;
+int iComNum = -1;
 
 
 int curServoPos_L;
@@ -132,8 +134,8 @@ void setup() {
   wandererServo.attach(11);
   wandererServo.write(90);
   delay(1000);
-  KeepSweeping();
 /*  
+	KeepSweeping();  
   if ((curServoPos_L - 90) > (90 - curServoPos_R))
   {
     pwt->Turn(2, 1);
@@ -150,35 +152,7 @@ void setup() {
 void loop() {
   iComNum = GetSerialNumber();
   Serial.print(pirs->GetDistanceVal());
-  //work in auto mode
-  if (0)//(iComNum > 500)	
-  {
-    if (pirs->Obstructed(11))
-    {
-      pwt->Stop();
-      delay(1000);
-      KeepSweeping();
-      if ((curServoPos_L - 90) > (90 - curServoPos_R))
-      {
-        pwt->Turn(2, 1);
-        delay(500);
-        pwt->Stop();
-        delay(500);
-      }
-      else
-      {
-        pwt->Turn(1, 1);
-        delay(500);
-        pwt->Stop();
-        delay(500);      
-      }    
-    }
-    else
-      pwt->Forward();	
-  }
-  //work in controlled mode
-  else
-  {
+		
     switch(iComNum)
     {
     case VEHICLE_FORWARD :
@@ -207,20 +181,47 @@ void loop() {
       break;
     case VEHICLE_STOP :
       pwt->Stop();
-      break;		
+      break;	
+		case VEHICLE_COM_MOVE :
+			CSettings::SystemModeCode = SYSTEM_MODE_MOVE;
+			break;
+		case VEHICLE_COM_SERVO :
+			CSettings::SystemModeCode = SYSTEM_MODE_SERVO;
+			break;
+		case VEHICLE_COM_AUTO :
+			CSettings::SystemModeCode = SYSTEM_MODE_AUTO;
+			if (pirs->Obstructed(11))
+			{
+				pwt->Stop();
+				delay(1000);
+				KeepSweeping();
+				if ((curServoPos_L - 90) > (90 - curServoPos_R))
+				{
+					pwt->Turn(2, 1);
+					delay(500);
+					pwt->Stop();
+					delay(500);
+				}
+				else
+				{
+					pwt->Turn(1, 1);
+					delay(500);
+					pwt->Stop();
+					delay(500);      
+				}    
+			}
+			else
+				pwt->Forward();			
+			break;
+		case VEHICLE_COM_STANDBY :
+			CSettings::SystemModeCode = SYSTEM_MODE_STANDBY;
+			digitalWrite(12, LOW);
+			digitalWrite(13, HIGH);   
+			delay(1000);             
+			digitalWrite(13, LOW);    
+			delay(1000);     			
+			break;
     default :
       break;
     }
-  }
 }
-<<<<<<< HEAD
-=======
-
-/*
-*
- * the end
- *
- */
-
-
->>>>>>> remotes/origin/master
