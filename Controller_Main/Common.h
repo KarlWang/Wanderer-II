@@ -11,18 +11,33 @@
 #define VEHICLE_SPIN_COUNTERCLOCKWISE	271
 #define VEHICLE_STOP			281
 
-#define MODE_VEHICLE	1
-#define MODE_SERVO	2
+#define VEHICLE_COM_MOVE	666
+#define VEHICLE_COM_SERVO	777
+#define VEHICLE_COM_AUTO	888
+#define VEHICLE_COM_STANDBY	999
+
+#define SYSTEM_MODE_MOVE	1
+#define SYSTEM_MODE_SERVO	2
+#define SYSTEM_MODE_AUTO	3
+#define SYSTEM_MODE_STANDBY	4
+
+#define SYSTEM_CON_LEFT_JOYSTICK_V  A4
+#define SYSTEM_CON_LEFT_JOYSTICK_H  A5
+#define SYSTEM_CON_RIGHT_JOYSTICK_V  A2
+#define SYSTEM_CON_RIGHT_JOYSTICK_H  A3
+#define SYSTEM_CON_XBEE_RX  7
+#define SYSTEM_CON_XBEE_TX  8
 
 #define BUTTON_1_PIN	5
 #define BUTTON_2_PIN	6
 #define BUTTON_3_PIN	7
 #define BUTTON_4_PIN	8
 
-class CWorkingMode
+class CSettings
 {
 public:
-	static int ModeCode;
+  static int SystemModeCode;	
 };
 
 #endif
+
