@@ -21,6 +21,13 @@
 #define SYSTEM_MODE_AUTO	3
 #define SYSTEM_MODE_STANDBY	4
 
+#define SYSTEM_CON_LEFT_JOYSTICK_V  A4
+#define SYSTEM_CON_LEFT_JOYSTICK_H  A5
+#define SYSTEM_CON_RIGHT_JOYSTICK_V  A2
+#define SYSTEM_CON_RIGHT_JOYSTICK_H  A3
+#define SYSTEM_CON_XBEE_RX  7
+#define SYSTEM_CON_XBEE_TX  8
+
 #define BUTTON_1_PIN	5
 #define BUTTON_2_PIN	6
 #define BUTTON_3_PIN	7
@@ -29,7 +36,8 @@
 class CSettings
 {
 public:
-	static int SystemModeCode;	
+  static int SystemModeCode;	
 };
 
 #endif
+
