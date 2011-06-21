@@ -13,13 +13,14 @@
 
 #define MODE_VEHICLE	1
 #define MODE_SERVO	2
+#define MODE_AUTO	3
 
 #define BUTTON_1_PIN	5
 #define BUTTON_2_PIN	6
 #define BUTTON_3_PIN	7
 #define BUTTON_4_PIN	8
 
-class CWorkingMode
+class CSettings
 {
 public:
 	static int ModeCode;
