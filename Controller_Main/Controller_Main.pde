@@ -1,31 +1,44 @@
 #include <NewSoftSerial.h>
+#include <serialGLCD.h>
 #include "JoyStickAdapter.h"
 #include "cppfix.h"
 #include "Common.h"
 
-int CWorkingMode::ModeCode = MODE_VEHICLE;
 CJoyStickAdapter * pjsa;
-NewSoftSerial srlXBee(2, 3);
+int CSettings::SystemModeCode = SYSTEM_MODE_MOVE;
+NewSoftSerial srlXBee(SYSTEM_CON_XBEE_RX, SYSTEM_CON_XBEE_TX);
+volatile boolean EnterMenu = 0;
 
 void setup() {                
-  Serial.begin(9600);
+  Serial.begin(115200);
   srlXBee.begin(9600);
-  pjsa = new CJoyStickAdapter(A5, A0, A4, A1);
-
-  pinMode(BUTTON_1_PIN, INPUT);
-  pinMode(BUTTON_2_PIN, INPUT);
-  pinMode(BUTTON_3_PIN, INPUT);
-  pinMode(BUTTON_4_PIN, INPUT);
+  pjsa = new CJoyStickAdapter(SYSTEM_CON_LEFT_JOYSTICK_V, SYSTEM_CON_LEFT_JOYSTICK_H, 
+    SYSTEM_CON_RIGHT_JOYSTICK_V, SYSTEM_CON_RIGHT_JOYSTICK_H);
+  attachInterrupt(0, MenuAction , FALLING);    
 }
 
+serialGLCD lcd;
+
 void loop() {
+  if (EnterMenu)
+  {
+    lcd.drawFilledBox(10,10,30,30,0x55);
+  }
+  else
+  {
+    lcd.clearLCD();
+  }
+  
+  srlXBee.println(pjsa->GetCommand());
+  delay(500);
+/*  
   if (HIGH == digitalRead(BUTTON_1_PIN))
   {
-    CWorkingMode::ModeCode = MODE_VEHICLE;	
+    CSettings::SystemModeCode = SYSTEM_MODE_MOVE;	
   }
   else if (HIGH == digitalRead(BUTTON_2_PIN))
   {
-    CWorkingMode::ModeCode = MODE_SERVO;	
+    CSettings::SystemModeCode = SYSTEM_MODE_SERVO;	
   }
   else if (HIGH == digitalRead(BUTTON_3_PIN))
   {
@@ -34,15 +47,20 @@ void loop() {
   {
   }
 
-  switch(CWorkingMode::ModeCode)
+  switch(CSettings::SystemModeCode)
   {
-  case MODE_VEHICLE:
+  case SYSTEM_MODE_MOVE:
     srlXBee.print(pjsa->GetCommand());
     delay(1000);
     break;
-  case MODE_SERVO:
+  case SYSTEM_MODE_SERVO:
     break;
   }
+*/  
 }
 
+void MenuAction()
+{
+  EnterMenu = !EnterMenu;
+}
 
