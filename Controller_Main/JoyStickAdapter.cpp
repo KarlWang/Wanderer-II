@@ -21,51 +21,79 @@ CJoyStickAdapter::~CJoyStickAdapter()
   delete m_paR;
 }
 
-int CJoyStickAdapter::GetCommand()
+int CJoyStickAdapter::GetCommand(int aModeCode)
 {
   m_iLeftVValue = m_paL->GetVValue();
+  m_iLeftHValue = m_paL->GetHValue();
   m_iRightVValue = m_paR->GetVValue();
+  m_iRightHValue = m_paR->GetHValue();
 
-  if ((m_iLeftVValue > 900) && (m_iRightVValue > 900))
+  if (SYSTEM_MODE_MOVE == aModeCode)
   {
-    return VEHICLE_FORWARD;
+    if ((m_iLeftVValue > 900) && (m_iRightVValue > 900))
+    {
+      return VEHICLE_FORWARD;
+    }
+    else if ((m_iLeftVValue < 100) && (m_iRightVValue < 100))
+    {
+      return VEHICLE_BACKWARD;
+    }
+    else if ((315 < m_iLeftVValue && m_iLeftVValue < 715) && (m_iRightVValue > 900))
+    {
+      return VEHICLE_FORWARD_TURN_LEFT;
+    }
+    else if ((m_iLeftVValue > 900) && (315 < m_iRightVValue && m_iRightVValue < 715))
+    {
+      return VEHICLE_FORWARD_TURN_RIGHT;
+    }
+    else if ((315 < m_iLeftVValue && m_iLeftVValue < 715) && (m_iRightVValue < 100))
+    {
+      return VEHICLE_BACKWARD_TURN_LEFT;
+    }
+    else if ((m_iLeftVValue < 100) && (315 < m_iRightVValue && m_iRightVValue < 715))
+    {
+      return VEHICLE_BACKWARD_TURN_RIGHT;
+    }
+    else if ((m_iLeftVValue > 900) && (m_iRightVValue < 100))
+    {
+      return VEHICLE_SPIN_CLOCKWISE;
+    }
+    else if ((m_iLeftVValue < 100) && (m_iRightVValue > 900))
+    {
+      return VEHICLE_SPIN_COUNTERCLOCKWISE;
+    }
+    else if ((315 < m_iLeftVValue && m_iLeftVValue < 715) && (315 < m_iRightVValue && m_iRightVValue < 715))
+    {
+      return VEHICLE_STOP;
+    }
+    else
+    {
+      return -1;
+    }	
   }
-  else if ((m_iLeftVValue < 100) && (m_iRightVValue < 100))
+  else if (SYSTEM_MODE_SERVO == aModeCode)
   {
-    return VEHICLE_BACKWARD;
-  }
-  else if ((315 < m_iLeftVValue && m_iLeftVValue < 715) && (m_iRightVValue > 900))
-  {
-    return VEHICLE_FORWARD_TURN_LEFT;
-  }
-  else if ((m_iLeftVValue > 900) && (315 < m_iRightVValue && m_iRightVValue < 715))
-  {
-    return VEHICLE_FORWARD_TURN_RIGHT;
-  }
-  else if ((315 < m_iLeftVValue && m_iLeftVValue < 715) && (m_iRightVValue < 100))
-  {
-    return VEHICLE_BACKWARD_TURN_LEFT;
-  }
-  else if ((m_iLeftVValue < 100) && (315 < m_iRightVValue && m_iRightVValue < 715))
-  {
-    return VEHICLE_BACKWARD_TURN_RIGHT;
-  }
-  else if ((m_iLeftVValue > 900) && (m_iRightVValue < 100))
-  {
-    return VEHICLE_SPIN_CLOCKWISE;
-  }
-  else if ((m_iLeftVValue < 100) && (m_iRightVValue > 900))
-  {
-    return VEHICLE_SPIN_COUNTERCLOCKWISE;
-  }
-  else if ((315 < m_iLeftVValue && m_iLeftVValue < 715) && (315 < m_iRightVValue && m_iRightVValue < 715))
-  {
-    return VEHICLE_STOP;
+    if (m_iLeftHValue > 900)
+      return SERVO_CLOCKWISE;
+    else if (m_iLeftHValue < 100)
+      return SERVO_COUNTERCLOCKWISE;
+    else
+    {
+      if (m_iRightHValue > 900)
+        return VEHICLE_SPIN_COUNTERCLOCKWISE;
+      else if (m_iRightHValue < 100)
+        return VEHICLE_SPIN_CLOCKWISE;      
+      else if (m_iRightVValue > 900)
+        return VEHICLE_FORWARD;
+      else if (m_iRightVValue < 100)
+        return VEHICLE_BACKWARD;
+      else
+        return VEHICLE_STOP;      
+    }
   }
   else
-  {
     return -1;
-  }	
 }
+
 
 

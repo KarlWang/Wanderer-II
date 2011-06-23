@@ -10,7 +10,7 @@ class CJoyStickAdapter
 public:
   CJoyStickAdapter(int aLeftHPin, int aLeftVPin, int aRightHPin, int aRightVPin);
   ~CJoyStickAdapter();
-  int GetCommand();
+  int GetCommand(int aModeCode);
 };
 
 #endif
