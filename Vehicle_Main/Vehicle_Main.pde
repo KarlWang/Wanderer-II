@@ -27,14 +27,14 @@ int ServoSweep(Servo &aServo, int aDirection)
   /*
 aDirection
    	0-180 : Specify servo degree
-   	200 : Servo degree 0->180
-   	300 : Servo degree 180->0
+   	188 : Servo degree 0->180
+   	199 : Servo degree 180->0
    */
   switch (aDirection)
   {
-  case 200 :
+  case 188 :
     break;
-  case 300 :
+  case 199 :
     break;
   default :
     if (aDirection >= 0 && aDirection <= 180)
@@ -132,7 +132,10 @@ void setup() {
   Serial.begin(9600);
   wandererServo.attach(11);
   wandererServo.write(90);
-  
+
+  CSettings::SystemModeCode = 4;
+	CSettings::ServoPos_Current = -1;
+
   pinMode(13, OUTPUT); //red
   pinMode(12, OUTPUT); //green  
   delay(1000);
@@ -152,39 +155,9 @@ void setup() {
 }
 
 void loop() {
-  //iComNum = GetSerialNumber();
-  iComNum = -1;
-  Serial.print(pirs->GetDistanceVal());
-
-  switch(iComNum)
+  iComNum = GetSerialNumber();
+  switch (iComNum)
   {
-  case VEHICLE_FORWARD :
-    pwt->Forward();
-    break;
-  case VEHICLE_BACKWARD :
-    pwt->Reverse();
-    break;
-  case VEHICLE_FORWARD_TURN_LEFT :
-    pwt->Turn(2, 1);
-    break;
-  case VEHICLE_FORWARD_TURN_RIGHT :
-    pwt->Turn(1, 1);
-    break;
-  case VEHICLE_BACKWARD_TURN_LEFT :
-    pwt->Turn_Backward_Left();
-    break;
-  case VEHICLE_BACKWARD_TURN_RIGHT :
-    pwt->Turn_Backward_Right();
-    break;
-  case VEHICLE_SPIN_CLOCKWISE :
-    pwt->Turn(1, 2);
-    break;
-  case VEHICLE_SPIN_COUNTERCLOCKWISE :
-    pwt->Turn(2, 2);
-    break;
-  case VEHICLE_STOP :
-    pwt->Stop();
-    break;	
   case VEHICLE_COM_MOVE :
     CSettings::SystemModeCode = SYSTEM_MODE_MOVE;
     break;
@@ -193,6 +166,89 @@ void loop() {
     break;
   case VEHICLE_COM_AUTO :
     CSettings::SystemModeCode = SYSTEM_MODE_AUTO;
+    break;
+  case VEHICLE_COM_STANDBY :
+    CSettings::SystemModeCode = SYSTEM_MODE_STANDBY;
+    break;
+  default:
+    break;
+  }
+
+  switch (CSettings::SystemModeCode)
+  {
+  case SYSTEM_MODE_MOVE :
+    Serial.print(pirs->GetDistanceVal());
+		CSettings::ServoPos_Current = -1;
+    switch(iComNum)
+    {
+    case VEHICLE_FORWARD :
+      pwt->Forward();
+      break;
+    case VEHICLE_BACKWARD :
+      pwt->Reverse();
+      break;
+    case VEHICLE_FORWARD_TURN_LEFT :
+      pwt->Turn(2, 1);
+      break;
+    case VEHICLE_FORWARD_TURN_RIGHT :
+      pwt->Turn(1, 1);
+      break;
+    case VEHICLE_BACKWARD_TURN_LEFT :
+      pwt->Turn_Backward_Left();
+      break;
+    case VEHICLE_BACKWARD_TURN_RIGHT :
+      pwt->Turn_Backward_Right();
+      break;
+    case VEHICLE_SPIN_CLOCKWISE :
+      pwt->Turn(1, 2);
+      break;
+    case VEHICLE_SPIN_COUNTERCLOCKWISE :
+      pwt->Turn(2, 2);
+      break;
+    case VEHICLE_STOP :
+      pwt->Stop();
+      break;	
+    default :
+      break;
+    }
+    break;
+  case SYSTEM_MODE_SERVO :
+    Serial.print(pirs->GetDistanceVal());
+		if (-1 == CSettings::ServoPos_Current)
+		{	
+			CSettings::ServoPos_Current = 90;
+			delay(1000);
+		}		
+    switch(iComNum)
+    {
+    case VEHICLE_FORWARD :
+      pwt->Forward();
+      break;
+    case VEHICLE_BACKWARD :
+      pwt->Reverse();
+      break;
+    case VEHICLE_SPIN_CLOCKWISE :
+      pwt->Turn(1, 2);
+      break;
+    case VEHICLE_SPIN_COUNTERCLOCKWISE :
+      pwt->Turn(2, 2);
+      break;
+    case VEHICLE_STOP :
+      pwt->Stop();
+      break;	
+    case SERVO_COUNTERCLOCKWISE :
+			wandererServo.write(++CSettings::ServoPos_Current);
+      break;
+    case SERVO_CLOCKWISE :
+			wandererServo.write(--CSettings::ServoPos_Current);
+      break;
+    default :
+      break;
+    }		
+    break;
+  case SYSTEM_MODE_AUTO :
+    Serial.print(pirs->GetDistanceVal());
+		CSettings::ServoPos_Current = -1;
     if (pirs->Obstructed(11))
     {
       pwt->Stop();
@@ -214,18 +270,20 @@ void loop() {
       }    
     }
     else
-      pwt->Forward();			
+      pwt->Forward();		
     break;
-  case VEHICLE_COM_STANDBY :
-    CSettings::SystemModeCode = SYSTEM_MODE_STANDBY;
+  case SYSTEM_MODE_STANDBY :
+		CSettings::ServoPos_Current = -1;
+    pwt->Stop();
     digitalWrite(12, LOW);
     digitalWrite(13, HIGH);   
     delay(1000);             
     digitalWrite(13, LOW);    
-    delay(1000);     			
+    delay(1000);     					
     break;
-  default :
+  default:
     break;
-  }
+  }	  			
 }
+
 
