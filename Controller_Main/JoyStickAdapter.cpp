@@ -48,11 +48,11 @@ int CJoyStickAdapter::GetCommand(int aModeCode)
     }
     else if ((315 < m_iLeftVValue && m_iLeftVValue < 715) && (m_iRightVValue < 100))
     {
-      return VEHICLE_BACKWARD_TURN_LEFT;
+      return VEHICLE_BACKWARD_TURN_RIGHT;
     }
     else if ((m_iLeftVValue < 100) && (315 < m_iRightVValue && m_iRightVValue < 715))
     {
-      return VEHICLE_BACKWARD_TURN_RIGHT;
+      return VEHICLE_BACKWARD_TURN_LEFT;
     }
     else if ((m_iLeftVValue > 900) && (m_iRightVValue < 100))
     {

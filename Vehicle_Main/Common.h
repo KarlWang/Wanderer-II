@@ -43,9 +43,10 @@ public:
   static int SystemModeCode;	
   static int SystemModeCode_Current;
   static int SystemModeCode_Old;
-	static int ServoPos_Current;
+  static int ServoPos_Current;
 };
 
 #endif
+
 
 

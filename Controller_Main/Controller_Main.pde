@@ -77,27 +77,32 @@ void loop() {
       case SYSTEM_MODE_STANDBY:
         srlXBee.print(VEHICLE_COM_STANDBY);      
         break;			
-      }					
+      }		
+      delay(100);			
       EnterMenu = 0;
       WriteLCD = true;
     }								
   }
   else
   {
-    if (WriteLCD)
+    //if (WriteLCD)
+    //{
+    if ((millis() / 1000) % 2 == 0)
     {
-      Display_Mode(CSettings::SystemModeCode);
-      WriteLCD = false;
+      if (srlXBee.available())
+        Display_Mode(CSettings::SystemModeCode);
     }      
+    //  WriteLCD = false;
+    //}      
     switch(CSettings::SystemModeCode)
     {
     case SYSTEM_MODE_MOVE:			
       srlXBee.print(pjsa->GetCommand(SYSTEM_MODE_MOVE));
-      delay(1000);
+      delay(15);
       break;
     case SYSTEM_MODE_SERVO:
       srlXBee.print(pjsa->GetCommand(SYSTEM_MODE_SERVO));
-      delay(1000);    
+      delay(15);    
       break;
     case SYSTEM_MODE_AUTO:
       break;
@@ -176,6 +181,9 @@ void Display_Mode(int aCurrentMode)
     break;
   case SYSTEM_MODE_SERVO:
     Serial.print("Mode: Servo"); 
+    lcd.gotoLine(3);
+    //if (srlXBee.available())
+    Serial.print(GetSerialFloat());
     break;
   case SYSTEM_MODE_AUTO:
     Serial.print("Mode: Auto");   
@@ -183,5 +191,24 @@ void Display_Mode(int aCurrentMode)
   }
 }
 
-
-
+int GetSerialFloat()
+{
+  int result=0;
+  int q = 0;
+  while (srlXBee.available()==0)
+  {
+    // do nothing until something comes into the serial buffer
+  } 
+  while (srlXBee.available()>0)
+  {
+    while (srlXBee.available()>0)
+    {
+      result=result*10; // move the previous digit to the next column on the left, e.g. 1 becomes 10
+      // while there is data in the buffer
+      q = srlXBee.read()-48; // read the next number in the buffer, subtract 48 to convert to the actual number
+      result=result+q;
+    }
+    delay(5); // the processor needs a moment to process
+  }
+  return result;
+}

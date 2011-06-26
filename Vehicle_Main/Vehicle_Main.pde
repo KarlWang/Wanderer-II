@@ -14,6 +14,7 @@ CIRSensor * pirs = new CIRSensor(A0);
 Servo wandererServo;
 
 int CSettings::SystemModeCode = SYSTEM_MODE_STANDBY;
+int CSettings::ServoPos_Current = -1;
 int iComNum = -1;
 
 
@@ -133,8 +134,8 @@ void setup() {
   wandererServo.attach(11);
   wandererServo.write(90);
 
-  CSettings::SystemModeCode = 4;
-	CSettings::ServoPos_Current = -1;
+  CSettings::SystemModeCode = SYSTEM_MODE_STANDBY;
+  CSettings::ServoPos_Current = -1;
 
   pinMode(13, OUTPUT); //red
   pinMode(12, OUTPUT); //green  
@@ -177,8 +178,8 @@ void loop() {
   switch (CSettings::SystemModeCode)
   {
   case SYSTEM_MODE_MOVE :
-    Serial.print(pirs->GetDistanceVal());
-		CSettings::ServoPos_Current = -1;
+    Serial.print(pirs->GetDistanceVal(), 2);
+    CSettings::ServoPos_Current = -1;
     switch(iComNum)
     {
     case VEHICLE_FORWARD :
@@ -213,12 +214,12 @@ void loop() {
     }
     break;
   case SYSTEM_MODE_SERVO :
-    Serial.print(pirs->GetDistanceVal());
-		if (-1 == CSettings::ServoPos_Current)
-		{	
-			CSettings::ServoPos_Current = 90;
-			delay(1000);
-		}		
+    Serial.print(pirs->GetDistanceVal(), 2);
+    if (-1 == CSettings::ServoPos_Current)
+    {	
+      CSettings::ServoPos_Current = 90;
+      delay(1000);
+    }		
     switch(iComNum)
     {
     case VEHICLE_FORWARD :
@@ -237,18 +238,18 @@ void loop() {
       pwt->Stop();
       break;	
     case SERVO_COUNTERCLOCKWISE :
-			wandererServo.write(++CSettings::ServoPos_Current);
+      wandererServo.write(--CSettings::ServoPos_Current);
       break;
     case SERVO_CLOCKWISE :
-			wandererServo.write(--CSettings::ServoPos_Current);
+      wandererServo.write(++CSettings::ServoPos_Current);
       break;
     default :
       break;
     }		
     break;
   case SYSTEM_MODE_AUTO :
-    Serial.print(pirs->GetDistanceVal());
-		CSettings::ServoPos_Current = -1;
+    Serial.print(pirs->GetDistanceVal(), 2 );
+    CSettings::ServoPos_Current = -1;
     if (pirs->Obstructed(11))
     {
       pwt->Stop();
@@ -273,17 +274,20 @@ void loop() {
       pwt->Forward();		
     break;
   case SYSTEM_MODE_STANDBY :
-		CSettings::ServoPos_Current = -1;
+    CSettings::ServoPos_Current = -1;
     pwt->Stop();
+    /*
     digitalWrite(12, LOW);
     digitalWrite(13, HIGH);   
     delay(1000);             
     digitalWrite(13, LOW);    
     delay(1000);     					
     break;
+    */
   default:
     break;
   }	  			
 }
+
 
 
