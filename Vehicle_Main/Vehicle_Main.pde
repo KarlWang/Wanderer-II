@@ -172,6 +172,7 @@ void loop() {
   default:
     break;
   }
+      
 
   switch (CSettings::SystemModeCode)
   {
@@ -246,7 +247,7 @@ void loop() {
     }		
     break;
   case SYSTEM_MODE_AUTO :
-    Serial.print(pirs->GetDistanceVal(), 2 );
+    Serial.print(pirs->GetDistanceVal(), 2);
     CSettings::ServoPos_Current = -1;
     if (pirs->Obstructed(11))
     {

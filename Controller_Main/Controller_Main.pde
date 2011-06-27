@@ -62,6 +62,7 @@ void loop() {
       CSettings::SystemModeCode = CSettings::SystemModeCode_Current;
       //Save current mode
       CSettings::SystemModeCode_Old = CSettings::SystemModeCode;
+      lcd.clearLCD();
       //Send command to vehicle
       switch(CSettings::SystemModeCode)
       {
@@ -87,11 +88,11 @@ void loop() {
   {
     //if (WriteLCD)
     //{
-    if ((millis() / 1000) % 2 == 0)
-    {
-      if (srlXBee.available())
-        Display_Mode(CSettings::SystemModeCode);
-    }      
+    //if ((millis() / 1000) % 2 == 0)
+    //{
+      //if (srlXBee.available())
+      Display_Mode(CSettings::SystemModeCode);
+    //}      
     //  WriteLCD = false;
     //}      
     switch(CSettings::SystemModeCode)
@@ -172,7 +173,6 @@ int Menu_Previous()
 
 void Display_Mode(int aCurrentMode)
 {
-  lcd.clearLCD();
   lcd.gotoLine(3);
   Serial.print("IR Sensor: ");
   Serial.print(GetSerialFloat());  
@@ -193,13 +193,13 @@ void Display_Mode(int aCurrentMode)
 
 float GetSerialFloat()
 {
-  char * cstrNum = 0;
+  char cstrNum[128];
   int iCount = 0;
-  while (srlXBee.available()==0)
+  while (srlXBee.available() == 0)
   {
     // do nothing until something comes into the serial buffer
   } 
-  while (srlXBee.available() > 0)
+  if (srlXBee.available() > 0)
   {
     while (srlXBee.available() > 0)
     {
@@ -207,6 +207,7 @@ float GetSerialFloat()
     }
     delay(5); // the processor needs a moment to process
   }
-  return atof(cstrNum);  
+  return atof(cstrNum); 
 }
+
 
