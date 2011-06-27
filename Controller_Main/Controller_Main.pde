@@ -173,42 +173,40 @@ int Menu_Previous()
 void Display_Mode(int aCurrentMode)
 {
   lcd.clearLCD();
+  lcd.gotoLine(3);
+  Serial.print("IR Sensor: ");
+  Serial.print(GetSerialFloat());  
   lcd.gotoLine(8);
   switch(aCurrentMode)
   { 
   case SYSTEM_MODE_MOVE:			
-    Serial.print("Mode: Vehicle");   
+    Serial.print("Mode: Vehicle");      
     break;
   case SYSTEM_MODE_SERVO:
     Serial.print("Mode: Servo"); 
-    lcd.gotoLine(3);
-    //if (srlXBee.available())
-    Serial.print(GetSerialFloat());
     break;
   case SYSTEM_MODE_AUTO:
-    Serial.print("Mode: Auto");   
+    Serial.print("Mode: Auto");     
     break;
   }
 }
 
-int GetSerialFloat()
+float GetSerialFloat()
 {
-  int result=0;
-  int q = 0;
+  char * cstrNum = 0;
+  int iCount = 0;
   while (srlXBee.available()==0)
   {
     // do nothing until something comes into the serial buffer
   } 
-  while (srlXBee.available()>0)
+  while (srlXBee.available() > 0)
   {
-    while (srlXBee.available()>0)
+    while (srlXBee.available() > 0)
     {
-      result=result*10; // move the previous digit to the next column on the left, e.g. 1 becomes 10
-      // while there is data in the buffer
-      q = srlXBee.read()-48; // read the next number in the buffer, subtract 48 to convert to the actual number
-      result=result+q;
+      cstrNum[iCount++] = srlXBee.read();
     }
     delay(5); // the processor needs a moment to process
   }
-  return result;
+  return atof(cstrNum);  
 }
+

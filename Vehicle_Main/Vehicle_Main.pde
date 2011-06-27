@@ -140,19 +140,6 @@ void setup() {
   pinMode(13, OUTPUT); //red
   pinMode(12, OUTPUT); //green  
   delay(1000);
-  /*  
-   	KeepSweeping();  
-   if ((curServoPos_L - 90) > (90 - curServoPos_R))
-   {
-   pwt->Turn(2, 1);
-   delay(500);
-   }
-   else
-   {
-   pwt->Turn(1, 1);
-   delay(500);
-   }  
-   */
 }
 
 void loop() {
@@ -167,6 +154,17 @@ void loop() {
     break;
   case VEHICLE_COM_AUTO :
     CSettings::SystemModeCode = SYSTEM_MODE_AUTO;
+    KeepSweeping();  
+    if ((curServoPos_L - 90) > (90 - curServoPos_R))
+    {
+      pwt->Turn(2, 1);
+      delay(500);
+    }
+    else
+    {
+      pwt->Turn(1, 1);
+      delay(500);
+    } 		
     break;
   case VEHICLE_COM_STANDBY :
     CSettings::SystemModeCode = SYSTEM_MODE_STANDBY;
@@ -278,16 +276,17 @@ void loop() {
     pwt->Stop();
     /*
     digitalWrite(12, LOW);
-    digitalWrite(13, HIGH);   
-    delay(1000);             
-    digitalWrite(13, LOW);    
-    delay(1000);     					
-    break;
-    */
+     digitalWrite(13, HIGH);   
+     delay(1000);             
+     digitalWrite(13, LOW);    
+     delay(1000);     					
+     break;
+     */
   default:
     break;
   }	  			
 }
+
 
 
 
