@@ -15,6 +15,7 @@ Servo wandererServo;
 
 int CSettings::SystemModeCode = SYSTEM_MODE_STANDBY;
 int CSettings::ServoPos_Current = -1;
+int CSettings::LastMillis = 0;
 int iComNum = -1;
 
 
@@ -172,12 +173,17 @@ void loop() {
   default:
     break;
   }
-      
+
+  //Sends IR sensor value to controller at least every 1 second.
+  if((millis() - CSettings::LastMillis) > 1000)
+  {
+    Serial.print(pirs->GetDistanceVal(), 2);
+    CSettings::LastMillis = millis();
+  }
 
   switch (CSettings::SystemModeCode)
   {
-  case SYSTEM_MODE_MOVE :
-    Serial.print(pirs->GetDistanceVal(), 2);
+  case SYSTEM_MODE_MOVE :    
     CSettings::ServoPos_Current = -1;
     switch(iComNum)
     {
@@ -213,7 +219,6 @@ void loop() {
     }
     break;
   case SYSTEM_MODE_SERVO :
-    Serial.print(pirs->GetDistanceVal(), 2);
     if (-1 == CSettings::ServoPos_Current)
     {	
       CSettings::ServoPos_Current = 90;
@@ -247,7 +252,6 @@ void loop() {
     }		
     break;
   case SYSTEM_MODE_AUTO :
-    Serial.print(pirs->GetDistanceVal(), 2);
     CSettings::ServoPos_Current = -1;
     if (pirs->Obstructed(11))
     {
@@ -287,6 +291,7 @@ void loop() {
     break;
   }	  			
 }
+
 
 
 

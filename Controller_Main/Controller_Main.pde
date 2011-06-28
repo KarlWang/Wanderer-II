@@ -4,23 +4,27 @@
 #include "cppfix.h"
 #include "Common.h"
 
-int CSettings::SystemModeCode = SYSTEM_MODE_MENU;
-//Temp mode
-int	CSettings::SystemModeCode_Current = CSettings::SystemModeCode;
-//Save current mode
-int CSettings::SystemModeCode_Old = CSettings::SystemModeCode;
-
+int CSettings::SystemModeCode;
+int CSettings::SystemModeCode_Current;
+int CSettings::SystemModeCode_Old;
 CJoyStickAdapter * pjsa;
 NewSoftSerial srlXBee(SYSTEM_CON_XBEE_RX, SYSTEM_CON_XBEE_TX);
-volatile boolean EnterMenu = 0;
-bool WriteLCD = true;
+volatile boolean EnterMenu;
+volatile boolean WriteLCD;
 
-void setup() {                
+void setup() {     
+  CSettings::SystemModeCode = SYSTEM_MODE_MENU;
+  //Temp mode
+  CSettings::SystemModeCode_Current = CSettings::SystemModeCode;
+  //Save current mode
+  CSettings::SystemModeCode_Old = CSettings::SystemModeCode;           
   Serial.begin(115200);
   srlXBee.begin(9600);
   pjsa = new CJoyStickAdapter(SYSTEM_CON_LEFT_JOYSTICK_V, SYSTEM_CON_LEFT_JOYSTICK_H, 
   SYSTEM_CON_RIGHT_JOYSTICK_V, SYSTEM_CON_RIGHT_JOYSTICK_H);
-  attachInterrupt(0, MenuInterruption , FALLING);    
+  attachInterrupt(0, MenuInterruption , FALLING);   
+  EnterMenu = false;	
+  WriteLCD = true;
 }
 
 serialGLCD lcd;
@@ -86,15 +90,14 @@ void loop() {
   }
   else
   {
-    //if (WriteLCD)
-    //{
-    //if ((millis() / 1000) % 2 == 0)
-    //{
-      //if (srlXBee.available())
+    if (WriteLCD)
+    {
       Display_Mode(CSettings::SystemModeCode);
-    //}      
-    //  WriteLCD = false;
-    //}      
+      WriteLCD = false;
+    } 
+
+    Display_IRValue();
+
     switch(CSettings::SystemModeCode)
     {
     case SYSTEM_MODE_MOVE:			
@@ -134,17 +137,17 @@ void Menu_Main(int aCurrentMode)
     Serial.print("  Please Select Mode");
     break;    
   case SYSTEM_MODE_MOVE:			
-    Serial.print("     Mode:Vehicle");
+    Serial.print("  Select Mode: Vehicle");
     lcd.gotoLine(8);
     Serial.print("Cancel             OK");    
     break;
   case SYSTEM_MODE_SERVO:
-    Serial.print("     Mode:Servo");
+    Serial.print("  Select Mode:Servo");
     lcd.gotoLine(8);
     Serial.print("Cancel             OK");     
     break;
   case SYSTEM_MODE_AUTO:
-    Serial.print("     Mode:Auto");
+    Serial.print("  Select Mode:Auto");
     lcd.gotoLine(8);
     Serial.print("Cancel             OK");     
     break;
@@ -172,10 +175,7 @@ int Menu_Previous()
 }
 
 void Display_Mode(int aCurrentMode)
-{
-  lcd.gotoLine(3);
-  Serial.print("IR Sensor: ");
-  Serial.print(GetSerialFloat());  
+{   
   lcd.gotoLine(8);
   switch(aCurrentMode)
   { 
@@ -191,15 +191,28 @@ void Display_Mode(int aCurrentMode)
   }
 }
 
+void Display_IRValue()
+{
+  float fValue;
+  fValue = GetSerialFloat();
+  if (-1 != fValue)
+  {
+    lcd.gotoLine(3);
+    Serial.print("IR Sensor: ");	
+    Serial.print(fValue);	
+  }
+}
+
 float GetSerialFloat()
 {
   char cstrNum[128];
   int iCount = 0;
-  while (srlXBee.available() == 0)
+  if (srlXBee.available() <= 0)
   {
-    // do nothing until something comes into the serial buffer
+    //Never wait for data coming.
+    return -1;
   } 
-  if (srlXBee.available() > 0)
+  else
   {
     while (srlXBee.available() > 0)
     {
@@ -209,5 +222,6 @@ float GetSerialFloat()
   }
   return atof(cstrNum); 
 }
+
 
 
