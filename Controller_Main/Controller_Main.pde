@@ -137,17 +137,17 @@ void Menu_Main(int aCurrentMode)
     Serial.print("  Please Select Mode");
     break;    
   case SYSTEM_MODE_MOVE:			
-    Serial.print("  Select Mode: Vehicle");
+    Serial.print("Select Mode: Vehicle");
     lcd.gotoLine(8);
     Serial.print("Cancel             OK");    
     break;
   case SYSTEM_MODE_SERVO:
-    Serial.print("  Select Mode:Servo");
+    Serial.print(" Select Mode:Servo");
     lcd.gotoLine(8);
     Serial.print("Cancel             OK");     
     break;
   case SYSTEM_MODE_AUTO:
-    Serial.print("  Select Mode:Auto");
+    Serial.print(" Select Mode:Auto");
     lcd.gotoLine(8);
     Serial.print("Cancel             OK");     
     break;
@@ -175,7 +175,9 @@ int Menu_Previous()
 }
 
 void Display_Mode(int aCurrentMode)
-{   
+{
+  lcd.gotoLine(3);
+  Serial.print("IR Sensor: ");
   lcd.gotoLine(8);
   switch(aCurrentMode)
   { 
@@ -197,9 +199,10 @@ void Display_IRValue()
   fValue = GetSerialFloat();
   if (-1 != fValue)
   {
-    lcd.gotoLine(3);
-    Serial.print("IR Sensor: ");	
-    Serial.print(fValue);	
+    lcd.gotoLine(5);
+    Serial.print("        ");
+    Serial.print(fValue);
+    Serial.print("    ");
   }
 }
 

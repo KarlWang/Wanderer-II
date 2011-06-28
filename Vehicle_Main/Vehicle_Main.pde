@@ -67,7 +67,7 @@ int KeepSweeping()
   for(tmpPos = 90; tmpPos < 180; tmpPos++)
   {                               
     wandererServo.write(tmpPos);
-    if (pirs->Obstructed(11))
+    if (pirs->Obstructed(14))
     {
       curServoPos_L = tmpPos; //Obstructed on left
     }
@@ -77,7 +77,7 @@ int KeepSweeping()
   for(tmpPos = 180; tmpPos > 90; tmpPos--) 
   {                                
     wandererServo.write(tmpPos); 
-    if (pirs->Obstructed(11))
+    if (pirs->Obstructed(14))
     {  
       curServoPos_L = tmpPos; //Obstructed on left
     }
@@ -87,7 +87,7 @@ int KeepSweeping()
   for (tmpPos = 90; tmpPos > 0; tmpPos-=1) 
   {
     wandererServo.write(tmpPos);
-    if (pirs->Obstructed(11))
+    if (pirs->Obstructed(14))
     {  
       curServoPos_R = tmpPos; //Obstructed on right
     }
@@ -97,7 +97,7 @@ int KeepSweeping()
   for (tmpPos = 0; tmpPos < 90; tmpPos++)
   {
     wandererServo.write(tmpPos);
-    if (pirs->Obstructed(11))
+    if (pirs->Obstructed(14))
     {
       curServoPos_R= tmpPos; //Obstructed on right  
     }
@@ -175,10 +175,10 @@ void loop() {
   }
 
   //Sends IR sensor value to controller at least every 1 second.
-  if((millis() - CSettings::LastMillis) > 1000)
+  if((millis() / 1000 - CSettings::LastMillis) > 1)
   {
     Serial.print(pirs->GetDistanceVal(), 2);
-    CSettings::LastMillis = millis();
+    CSettings::LastMillis++;
   }
 
   switch (CSettings::SystemModeCode)
@@ -253,7 +253,7 @@ void loop() {
     break;
   case SYSTEM_MODE_AUTO :
     CSettings::ServoPos_Current = -1;
-    if (pirs->Obstructed(11))
+    if (pirs->Obstructed(14))
     {
       pwt->Stop();
       delay(1000);
