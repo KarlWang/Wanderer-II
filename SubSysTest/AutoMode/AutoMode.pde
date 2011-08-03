@@ -45,16 +45,23 @@ aDirection
   }
 }
 
-void ServoFastSweep()
+void Sweep_Move()
 {
-  wandererServo.write(0);
-  delay(2000);
-  wandererServo.write(180);
-  delay(2000);
-  wandererServo.write(90);  
+  int tmpPos;  
+  for(tmpPos = 70; tmpPos < 110; tmpPos++)
+  {                               
+    wandererServo.write(tmpPos);
+    delay(15);
+  }	
+	
+  for(tmpPos = 110; tmpPos > 70; tmpPos--)
+  {                               
+    wandererServo.write(tmpPos);
+    delay(15);
+  }	
 }
 
-int KeepSweeping()
+int Sweep_Stop()
 {
   int tmpPos;  
   curServoPos_L = 180;
@@ -117,29 +124,35 @@ void loop() {
   {
     pwt->Stop();
     delay(1000);
-    KeepSweeping();
+    Sweep_Stop();
     if (((curServoPos_L - 90) < fCntVal) && ((90 - curServoPos_R) < fCntVal))
     {
       pwt->Reverse();
       delay(500);
+			pwt->Turn(2, 2);
+			delay(500);
     }
-    if ((curServoPos_L - 90) > (90 - curServoPos_R))
-    {
-      pwt->Turn(2, 1);
-      delay(500);
-      pwt->Stop();
-      delay(500);
-    }
-    else
-    {
-      pwt->Turn(1, 1);
-      delay(500);
-      pwt->Stop();
-      delay(500);      
-    }    
+		else
+			if ((curServoPos_L - 90) > (90 - curServoPos_R))
+			{
+				pwt->Turn(2, 1);
+				delay(500);
+				pwt->Stop();
+				delay(500);
+			}
+			else
+			{
+				pwt->Turn(1, 1);
+				delay(500);
+				pwt->Stop();
+				delay(500);      
+			}    
   }
   else
+	{
+		Sweep_Move();
     pwt->Forward();		  			
+	}
 }
 
 
