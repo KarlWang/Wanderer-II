@@ -14,8 +14,8 @@ int curServoPos_L;
 int curServoPos_R;
 bool obs_L;
 bool obs_R;
-float fDisVal = 11.00;
-float fCntVal = 20.00;
+float fDisVal = 20.00;
+float fCntVal = 10.00;
 
 float GetDistanceVal()
 {
@@ -53,7 +53,7 @@ void Sweep_Move()
     wandererServo.write(tmpPos);
     delay(15);
   }	
-	
+
   for(tmpPos = 110; tmpPos > 70; tmpPos--)
   {                               
     wandererServo.write(tmpPos);
@@ -110,7 +110,7 @@ int Sweep_Stop()
   }  
 
   wandererServo.write(tmpPos);
-//  delay(15);
+  //  delay(15);
 }
 
 void setup() {  
@@ -120,40 +120,56 @@ void setup() {
 }
 
 void loop() {
-  if (GetDistanceVal() < fDisVal)
+  long dis;
+  
+  pwt->Forward();
+  do
   {
-    pwt->Stop();
-    delay(1000);
-    Sweep_Stop();
-    if (((curServoPos_L - 90) < fCntVal) && ((90 - curServoPos_R) < fCntVal))
+    dis = GetDistanceVal();
+    delay(25);
+  }
+  while(dis > fDisVal);
+
+  pwt->Stop();
+  delay(200);
+  Sweep_Stop();
+  if (((curServoPos_L - 90) < fCntVal) && ((90 - curServoPos_R) < fCntVal))
+  {
+    pwt->Reverse();
+    delay(300);
+//    pwt->Turn(2, 2);
+//    delay(300);
+    if ((curServoPos_L - 90) > (90 - curServoPos_R))
     {
-      pwt->Reverse();
-      delay(500);
-			pwt->Turn(2, 2);
-			delay(500);
+      pwt->Turn(2, 2);
+      delay(300);
     }
-		else
-			if ((curServoPos_L - 90) > (90 - curServoPos_R))
-			{
-				pwt->Turn(2, 1);
-				delay(500);
-				pwt->Stop();
-				delay(500);
-			}
-			else
-			{
-				pwt->Turn(1, 1);
-				delay(500);
-				pwt->Stop();
-				delay(500);      
-			}    
+    else
+    {
+      pwt->Turn(1, 2);
+      delay(300);     
+    }    
   }
   else
-	{
-		Sweep_Move();
-    pwt->Forward();		  			
-	}
+  {
+    if ((curServoPos_L - 90) > (90 - curServoPos_R))
+    {
+      pwt->Turn(2, 1);
+      delay(300);
+      pwt->Stop();
+      delay(500);
+    }
+    else
+    {
+      pwt->Turn(1, 1);
+      delay(300);
+      pwt->Stop();
+      delay(500);      
+    }    
+  }
 }
+
+
 
 
 

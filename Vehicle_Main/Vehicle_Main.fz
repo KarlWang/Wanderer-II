@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module fritzingVersion="0.5.2b.02.18.4756">
+<module fritzingVersion="0.6.2b.07.11.5217">
     <views>
         <view name="breadboardView" backgroundColor="#cccccc"/>
         <view name="schematicView" backgroundColor="#ffffff"/>
@@ -16,7 +16,7 @@
                 </pcbView>
             </views>
         </instance>
-        <instance moduleIdRef="BreadboardModuleID" modelIndex="1905" path="C:/Program Files/fritzing.2011.02.18.pc/parts/core/breadboard.fzp">
+        <instance moduleIdRef="BreadboardModuleID" modelIndex="1905" path="C:/Program Files/fritzing.2011.07.11.pc/parts/core/breadboard.fzp">
             <title>Breadboard1</title>
             <views>
                 <breadboardView layer="breadboardbreadboard">
@@ -144,7 +144,7 @@
                 </schematicView>
             </views>
         </instance>
-        <instance moduleIdRef="4321DEAB24_ST" modelIndex="1941" path="C:/Program Files/fritzing.2011.02.18.pc/parts/core/arduino.fzp">
+        <instance moduleIdRef="4321DEAB24_ST" modelIndex="1941" path="C:/Program Files/fritzing.2011.07.11.pc/parts/core/arduino.fzp">
             <title>Arduino1</title>
             <views>
                 <breadboardView layer="breadboardbreadboard">
@@ -209,7 +209,7 @@
                     </connectors>
                 </pcbView>
                 <schematicView layer="schematic">
-                    <geometry z="1.50002" x="57" y="142"/>
+                    <geometry z="2.50002" x="57" y="142"/>
                     <titleGeometry visible="true" x="325.65" y="128" z="4.5" xOffset="268.65" yOffset="-14" textColor="#000000" fontSize="9">
                         <displayKey key=""/>
                     </titleGeometry>
@@ -246,7 +246,7 @@
                 </schematicView>
             </views>
         </instance>
-        <instance moduleIdRef="3234DBDC80" modelIndex="1946" path="C:/Program Files/fritzing.2011.02.18.pc/parts/core/basic_servo.fzp">
+        <instance moduleIdRef="3234DBDC80" modelIndex="1946" path="C:/Program Files/fritzing.2011.07.11.pc/parts/core/basic_servo.fzp">
             <title>J1</title>
             <views>
                 <breadboardView layer="breadboard">
@@ -299,7 +299,7 @@
                     </connectors>
                 </pcbView>
                 <schematicView layer="schematic">
-                    <geometry z="1.50004" x="646" y="186"/>
+                    <geometry z="2.50004" x="646" y="186"/>
                     <titleGeometry visible="true" x="767.5" y="172" z="4.50001" xOffset="121.5" yOffset="-14" textColor="#000000" fontSize="9">
                         <displayKey key=""/>
                     </titleGeometry>
@@ -366,7 +366,7 @@
                     </connectors>
                 </pcbView>
                 <schematicView layer="schematicTrace">
-                    <geometry z="3.50001" x="322.83" y="275.848" x1="0" y1="0" x2="324.42" y2="-30.0151" wireFlags="64"/>
+                    <geometry z="4.50001" x="322.83" y="275.848" x1="0" y1="0" x2="324.42" y2="-30.0151" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#000000" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="schematicTrace">
@@ -425,7 +425,7 @@
                     </connectors>
                 </pcbView>
                 <schematicView layer="schematicTrace">
-                    <geometry z="3.50003" x="31.6498" y="9" x1="0" y1="0" x2="615.6" y2="265.833" wireFlags="64"/>
+                    <geometry z="4.50003" x="31.6498" y="9" x1="0" y1="0" x2="615.6" y2="265.833" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#000000" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="schematicTrace">
@@ -467,7 +467,7 @@
                 </breadboardView>
             </views>
         </instance>
-        <instance moduleIdRef="1000AFDF10011" modelIndex="1971" path="C:/Program Files/fritzing.2011.02.18.pc/parts/core/battery-AA.fzp">
+        <instance moduleIdRef="1000AFDF10011" modelIndex="1971" path="C:/Program Files/fritzing.2011.07.11.pc/parts/core/battery-AA.fzp">
             <title>VCC1</title>
             <views>
                 <breadboardView layer="breadboard">
@@ -508,7 +508,7 @@
                     </connectors>
                 </pcbView>
                 <schematicView layer="schematic">
-                    <geometry z="1.50005" x="636" y="66"/>
+                    <geometry z="2.50005" x="636" y="66"/>
                     <titleGeometry visible="true" x="703.875" y="52" z="4.50002" xOffset="67.875" yOffset="-14" textColor="#000000" fontSize="9">
                         <displayKey key=""/>
                     </titleGeometry>
@@ -529,7 +529,7 @@
                 </schematicView>
             </views>
         </instance>
-        <instance moduleIdRef="1000AFDF10011" modelIndex="1973" path="C:/Program Files/fritzing.2011.02.18.pc/parts/core/battery-AA.fzp">
+        <instance moduleIdRef="1000AFDF10011" modelIndex="1973" path="C:/Program Files/fritzing.2011.07.11.pc/parts/core/battery-AA.fzp">
             <title>VCC2</title>
             <views>
                 <breadboardView layer="breadboard">
@@ -570,7 +570,7 @@
                     </connectors>
                 </pcbView>
                 <schematicView layer="schematic">
-                    <geometry z="1.50007" x="894" y="64"/>
+                    <geometry z="2.50007" x="894" y="64"/>
                     <titleGeometry visible="true" x="961.875" y="50" z="4.50003" xOffset="67.875" yOffset="-14" textColor="#000000" fontSize="9">
                         <displayKey key=""/>
                     </titleGeometry>
@@ -631,7 +631,7 @@
                     </connectors>
                 </pcbView>
                 <schematicView layer="schematicTrace">
-                    <geometry z="3.50006" x="928.563" y="173.562" x1="0" y1="0" x2="-258" y2="-104.875" wireFlags="64"/>
+                    <geometry z="4.50006" x="928.563" y="173.562" x1="0" y1="0" x2="-258" y2="-104.875" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#000000" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="schematicTrace">
@@ -690,7 +690,7 @@
                     </connectors>
                 </pcbView>
                 <schematicView layer="schematicTrace">
-                    <geometry z="3.50008" x="562.647" y="18" x1="0" y1="0" x2="365.915" y2="48.6875" wireFlags="64"/>
+                    <geometry z="4.50008" x="562.647" y="18" x1="0" y1="0" x2="365.915" y2="48.6875" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#000000" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="schematicTrace">
@@ -749,7 +749,7 @@
                     </connectors>
                 </pcbView>
                 <schematicView layer="schematicTrace">
-                    <geometry z="3.50009" x="544.647" y="9" x1="0" y1="0" x2="125.915" y2="166.562" wireFlags="64"/>
+                    <geometry z="4.50009" x="544.647" y="9" x1="0" y1="0" x2="125.915" y2="166.562" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#000000" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="schematicTrace">
@@ -791,7 +791,7 @@
                 </breadboardView>
             </views>
         </instance>
-        <instance moduleIdRef="beab33bd7feee277622ef76dd6e79e4d" modelIndex="1994" path="C:/Program Files/fritzing.2011.02.18.pc/parts/core/infrared_proximity_sensor.fzp">
+        <instance moduleIdRef="beab33bd7feee277622ef76dd6e79e4d" modelIndex="1994" path="C:/Program Files/fritzing.2011.07.11.pc/parts/core/infrared_proximity_sensor.fzp">
             <title>J2</title>
             <views>
                 <breadboardView layer="breadboard">
@@ -844,7 +844,7 @@
                     </connectors>
                 </pcbView>
                 <schematicView layer="schematic">
-                    <geometry z="1.5001" x="359" y="89"/>
+                    <geometry z="2.5001" x="359" y="89"/>
                     <titleGeometry visible="true" x="439.1" y="75" z="4.50005" xOffset="80.1" yOffset="-14" textColor="#000000" fontSize="9">
                         <displayKey key=""/>
                     </titleGeometry>
@@ -875,7 +875,7 @@
             <title>Wire8</title>
             <views>
                 <breadboardView layer="breadboardWire">
-                    <geometry z="3.50018" x="364.026" y="142.841" x1="0" y1="0" x2="-0.025625" y2="40.1594" wireFlags="64"/>
+                    <geometry z="3.50017" x="364.026" y="142.841" x1="0" y1="0" x2="-0.025625" y2="40.1594" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#418dd9" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="breadboardWire">
@@ -911,7 +911,7 @@
                     </connectors>
                 </pcbView>
                 <schematicView layer="schematicTrace">
-                    <geometry z="3.50012" x="59.8219" y="435.358" x1="0" y1="0" x2="376.574" y2="-266.701" wireFlags="64"/>
+                    <geometry z="4.50012" x="59.8219" y="435.358" x1="0" y1="0" x2="376.574" y2="-266.701" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#000000" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="schematicTrace">
@@ -934,7 +934,7 @@
             <title>Wire10</title>
             <views>
                 <breadboardView layer="breadboardWire">
-                    <geometry z="3.50021" x="328.005" y="142.841" x1="0" y1="0" x2="0.995" y2="81.1594" wireFlags="64"/>
+                    <geometry z="3.5002" x="328.005" y="142.841" x1="0" y1="0" x2="0.995" y2="81.1594" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#418dd9" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="breadboardWire">
@@ -970,7 +970,7 @@
                     </connectors>
                 </pcbView>
                 <schematicView layer="schematicTrace">
-                    <geometry z="3.50015" x="191.318" y="646.236" x1="0" y1="0" x2="194.467" y2="-399.18" wireFlags="64"/>
+                    <geometry z="4.50014" x="191.318" y="646.236" x1="0" y1="0" x2="194.467" y2="-399.18" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#000000" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="schematicTrace">
@@ -993,7 +993,7 @@
             <title>Wire11</title>
             <views>
                 <breadboardView layer="breadboardWire">
-                    <geometry z="3.50017" x="92" y="189" x1="0" y1="0" x2="1.26491" y2="-378.113" wireFlags="64"/>
+                    <geometry z="3.50016" x="92" y="189" x1="0" y1="0" x2="1.26491" y2="-378.113" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#418dd9" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="breadboardWire">
@@ -1016,7 +1016,7 @@
             <title>Wire12</title>
             <views>
                 <breadboardView layer="breadboardWire">
-                    <geometry z="3.50016" x="364" y="183" x1="0" y1="0" x2="-272" y2="6" wireFlags="64"/>
+                    <geometry z="3.50015" x="364" y="183" x1="0" y1="0" x2="-272" y2="6" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#418dd9" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="breadboardWire">
@@ -1039,7 +1039,7 @@
             <title>Wire18</title>
             <views>
                 <breadboardView layer="breadboardWire">
-                    <geometry z="3.5002" x="101" y="227" x1="0" y1="0" x2="1.2324" y2="-416.059" wireFlags="64"/>
+                    <geometry z="3.50019" x="101" y="227" x1="0" y1="0" x2="1.2324" y2="-416.059" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#418dd9" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="breadboardWire">
@@ -1062,7 +1062,7 @@
             <title>Wire19</title>
             <views>
                 <breadboardView layer="breadboardWire">
-                    <geometry z="3.50019" x="329" y="224" x1="0" y1="0" x2="-228" y2="3" wireFlags="64"/>
+                    <geometry z="3.50018" x="329" y="224" x1="0" y1="0" x2="-228" y2="3" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#418dd9" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="breadboardWire">
@@ -1085,7 +1085,7 @@
             <title>Wire20</title>
             <views>
                 <breadboardView layer="breadboardWire">
-                    <geometry z="3.50022" x="23.6498" y="280" x1="0" y1="0" x2="1.52801" y2="-362.093" wireFlags="64"/>
+                    <geometry z="3.50021" x="23.6498" y="280" x1="0" y1="0" x2="1.52801" y2="-362.093" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#418dd9" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="breadboardWire">
@@ -1103,7 +1103,7 @@
                     </connectors>
                 </breadboardView>
                 <pcbView layer="copper0trace">
-                    <geometry z="7.50017" x="40.6498" y="18" x1="0" y1="0" x2="32.1602" y2="286.3" wireFlags="64"/>
+                    <geometry z="7.50016" x="40.6498" y="18" x1="0" y1="0" x2="32.1602" y2="286.3" wireFlags="64"/>
                     <wireExtras mils="11.1111" color="#000000" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="copper0trace">
@@ -1121,7 +1121,7 @@
                     </connectors>
                 </pcbView>
                 <schematicView layer="schematicTrace">
-                    <geometry z="3.50016" x="40.6498" y="18" x1="0" y1="0" x2="606.6" y2="198.833" wireFlags="64"/>
+                    <geometry z="4.50015" x="40.6498" y="18" x1="0" y1="0" x2="606.6" y2="198.833" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#000000" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="schematicTrace">
@@ -1144,7 +1144,7 @@
             <title>Wire21</title>
             <views>
                 <breadboardView layer="breadboardWire">
-                    <geometry z="3.50023" x="320.648" y="307" x1="0" y1="0" x2="-1.61517" y2="-164.159" wireFlags="64"/>
+                    <geometry z="3.50022" x="320.648" y="307" x1="0" y1="0" x2="-1.61517" y2="-164.159" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#418dd9" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="breadboardWire">
@@ -1162,7 +1162,7 @@
                     </connectors>
                 </breadboardView>
                 <pcbView layer="copper0trace">
-                    <geometry z="7.50018" x="337.648" y="45" x1="0" y1="0" x2="-374.243" y2="418.105" wireFlags="64"/>
+                    <geometry z="7.50017" x="337.648" y="45" x1="0" y1="0" x2="-374.243" y2="418.105" wireFlags="64"/>
                     <wireExtras mils="11.1111" color="#000000" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="copper0trace">
@@ -1180,7 +1180,7 @@
                     </connectors>
                 </pcbView>
                 <schematicView layer="schematicTrace">
-                    <geometry z="3.50017" x="337.648" y="45" x1="0" y1="0" x2="-172.922" y2="99.4656" wireFlags="64"/>
+                    <geometry z="4.50016" x="337.648" y="45" x1="0" y1="0" x2="-172.922" y2="99.4656" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#000000" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="schematicTrace">
@@ -1203,7 +1203,7 @@
             <title>Wire22</title>
             <views>
                 <breadboardView layer="breadboardWire">
-                    <geometry z="3.50025" x="320.648" y="316" x1="0" y1="0" x2="-207.648" y2="2" wireFlags="64"/>
+                    <geometry z="3.50024" x="320.648" y="316" x1="0" y1="0" x2="-207.648" y2="2" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#418dd9" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="breadboardWire">
@@ -1221,7 +1221,7 @@
                     </connectors>
                 </breadboardView>
                 <pcbView layer="copper0trace">
-                    <geometry z="7.50019" x="337.648" y="54" x1="0" y1="0" x2="-264.838" y2="299.9" wireFlags="64"/>
+                    <geometry z="7.50018" x="337.648" y="54" x1="0" y1="0" x2="-264.838" y2="299.9" wireFlags="64"/>
                     <wireExtras mils="11.1111" color="#000000" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="copper0trace">
@@ -1239,7 +1239,7 @@
                     </connectors>
                 </pcbView>
                 <schematicView layer="schematicTrace">
-                    <geometry z="3.50018" x="337.648" y="54" x1="0" y1="0" x2="48.093" y2="37.185" wireFlags="64"/>
+                    <geometry z="4.50017" x="337.648" y="54" x1="0" y1="0" x2="48.093" y2="37.185" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#000000" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="schematicTrace">
@@ -1262,7 +1262,7 @@
             <title>Wire23</title>
             <views>
                 <breadboardView layer="breadboardWire">
-                    <geometry z="3.50024" x="113" y="318" x1="0" y1="0" x2="-1.82886" y2="-507.059" wireFlags="64"/>
+                    <geometry z="3.50023" x="113" y="318" x1="0" y1="0" x2="-1.82886" y2="-507.059" wireFlags="64"/>
                     <wireExtras mils="22.2222" color="#418dd9" opacity="1"/>
                     <connectors>
                         <connector connectorId="connector0" layer="breadboardWire">
@@ -1281,7 +1281,7 @@
                 </breadboardView>
             </views>
         </instance>
-        <instance moduleIdRef="1000FADF10011" modelIndex="2086" path="C:/Program Files/fritzing.2011.02.18.pc/parts/core/dc_motor.fzp">
+        <instance moduleIdRef="1000FADF10011" modelIndex="2086" path="C:/Program Files/fritzing.2011.07.11.pc/parts/core/dc_motor.fzp">
             <title>M1</title>
             <views>
                 <breadboardView layer="breadboard">
@@ -1294,14 +1294,14 @@
                     </titleGeometry>
                 </pcbView>
                 <schematicView layer="schematic">
-                    <geometry z="1.50011" x="47" y="310"/>
+                    <geometry z="2.50011" x="47" y="310"/>
                     <titleGeometry visible="true" x="184.875" y="296" z="4.50006" xOffset="137.875" yOffset="-14" textColor="#000000" fontSize="9">
                         <displayKey key=""/>
                     </titleGeometry>
                 </schematicView>
             </views>
         </instance>
-        <instance moduleIdRef="1000FADF10011" modelIndex="2088" path="C:/Program Files/fritzing.2011.02.18.pc/parts/core/dc_motor.fzp">
+        <instance moduleIdRef="1000FADF10011" modelIndex="2088" path="C:/Program Files/fritzing.2011.07.11.pc/parts/core/dc_motor.fzp">
             <title>M2</title>
             <views>
                 <breadboardView layer="breadboard">
@@ -1314,11 +1314,32 @@
                     </titleGeometry>
                 </pcbView>
                 <schematicView layer="schematic">
-                    <geometry z="1.50013" x="42" y="495"/>
+                    <geometry z="2.50013" x="42" y="495"/>
                     <titleGeometry visible="true" x="179.875" y="481" z="4.50007" xOffset="137.875" yOffset="-14" textColor="#000000" fontSize="9">
                         <displayKey key=""/>
                     </titleGeometry>
                 </schematicView>
+            </views>
+        </instance>
+        <instance moduleIdRef="XBee-Regulated-v12" modelIndex="2858" path="C:/Program Files/fritzing.2011.07.11.pc/parts/core/XBee-Regulated-v12.fzp">
+            <title>Part1</title>
+            <views>
+                <breadboardView layer="breadboard">
+                    <geometry z="2.50025" x="385" y="-144.4"/>
+                </breadboardView>
+                <schematicView layer="schematic">
+                    <geometry z="2.50018" x="467" y="22"/>
+                    <titleGeometry visible="true" x="735.748" y="8" z="5.50018" xOffset="268.748" yOffset="-14" textColor="#000000" fontSize="9">
+                        <displayKey key=""/>
+                        <displayKey key="part number"/>
+                    </titleGeometry>
+                </schematicView>
+                <pcbView layer="copper0">
+                    <geometry z="6.50019" x="349.875" y="366.13"/>
+                    <titleGeometry visible="true" x="475.52" y="357.13" z="12.5002" xOffset="125.645" yOffset="-9" textColor="#ffffff" fontSize="5">
+                        <displayKey key=""/>
+                    </titleGeometry>
+                </pcbView>
             </views>
         </instance>
     </instances>
