@@ -19,7 +19,16 @@
   #define SERVOMAX     2400    // Max travel at 2.4ms = 2400 microseconds
   #define SERVOMIN     600     // Min travel at 0.6ms =  600 microseconds
   #define SERVOCENTER  1500    // Center at 1.5ms = 1500 microseconds
-  #define STEP         35      // Decrease for slower motion
+  #define SERVORIGHT    1800   // Servo position when looking right.
+  #define SERVOLEFT     1200   // Servo position when looking left.  
+  #define STEP         70      // Decrease for slower motion
+  
+void pulseOut(byte pinNumber, int duration)
+{
+  digitalWrite(servoPin, HIGH);
+  delayMicroseconds(duration);
+  digitalWrite(servoPin, LOW);
+}  
 
 // setup
 // Set servo as OUTPUT pin.  Move servo to center position.
@@ -27,6 +36,7 @@
 void setup()                                                 
 {
   int index;
+  int pulseWidth; 
   
   pinMode(servoPin, OUTPUT);
   
@@ -35,6 +45,14 @@ void setup()
   {
     digitalWrite(servoPin, HIGH);
     delayMicroseconds(SERVOCENTER);
+    digitalWrite(servoPin, LOW);
+    delay(20);
+  }
+
+  for (pulseWidth = SERVOCENTER;pulseWidth >=SERVOMIN;pulseWidth -= STEP)
+  {
+    digitalWrite(servoPin, HIGH);
+    delayMicroseconds(pulseWidth);
     digitalWrite(servoPin, LOW);
     delay(20);
   }  
@@ -47,6 +65,19 @@ void setup()
 
 void loop()                    
 {
+  int numPulses;  
+  for (numPulses = 0; numPulses < 100; numPulses++)
+  {
+    pulseOut(servoPin, SERVOLEFT);
+    delay(20);
+  }   
+  
+  for (numPulses = 0; numPulses < 100; numPulses++)
+  {
+    pulseOut(servoPin, SERVORIGHT);
+    delay(20);
+  }  
+/*
   int index;
   int pulseWidth;                          // Between 600 and 2400us.
  
@@ -76,5 +107,5 @@ void loop()
     digitalWrite(servoPin, LOW);
     delay(20);
   } 
-  
+*/  
 } // End main program. 

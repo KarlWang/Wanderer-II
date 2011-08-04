@@ -4,12 +4,15 @@
 #include "WandererMotor.h"
 #include "cppfix.h"
 
-CWandererTrack * pwt = new CWandererTrack(7, 5, 6, 9, 8);
 
+#define SERVORIGHT    1800   // Servo position when looking right.
+#define SERVOLEFT     1200   // Servo position when looking left.  
+
+CWandererTrack * pwt = new CWandererTrack(7, 5, 6, 9, 8);
 
 Servo wandererServo;
 
-
+int servoPin = 11;
 int curServoPos_L;
 int curServoPos_R;
 bool obs_L;
@@ -113,20 +116,41 @@ int Sweep_Stop()
   //  delay(15);
 }
 
+void pulseOut(byte pinNumber, int duration)
+{
+  digitalWrite(servoPin, HIGH);
+  delayMicroseconds(duration);
+  digitalWrite(servoPin, LOW);
+} 
+
 void setup() {  
-  wandererServo.attach(11);
+  wandererServo.attach(servoPin);
   wandererServo.write(90);
   delay(1000);
 }
 
 void loop() {
-  long dis;
-  
+  long dis, disLeft, disRight;
+  int numPulses;
+
   pwt->Forward();
   do
   {
-    dis = GetDistanceVal();
+    for (numPulses = 0; numPulses < 10; numPulses++)
+    {
+      pulseOut(servoPin, SERVOLEFT);
+      delay(20);
+    } 	
+    disLeft = GetDistanceVal();
     delay(25);
+    for (numPulses = 0; numPulses < 10; numPulses++)
+    {
+      pulseOut(servoPin, SERVORIGHT);
+      delay(20);
+    } 	
+    disRight = GetDistanceVal();
+    delay(25);
+    dis = (disLeft > disRight ? disRight : disLeft);
   }
   while(dis > fDisVal);
 
@@ -137,8 +161,8 @@ void loop() {
   {
     pwt->Reverse();
     delay(300);
-//    pwt->Turn(2, 2);
-//    delay(300);
+    //    pwt->Turn(2, 2);
+    //    delay(300);
     if ((curServoPos_L - 90) > (90 - curServoPos_R))
     {
       pwt->Turn(2, 2);
@@ -168,6 +192,7 @@ void loop() {
     }    
   }
 }
+
 
 
 
