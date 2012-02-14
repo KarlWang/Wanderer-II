@@ -4,7 +4,6 @@
 #include "WandererMotor.h"
 #include "WandererSensor.h"
 #include "IRSensor.h"
-#include "cppfix.h"
 #include "Common.h"
 
 CWandererTrack * pwt = new CWandererTrack(7, 5, 6, 9, 8);

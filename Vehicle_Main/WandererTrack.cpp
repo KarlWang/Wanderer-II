@@ -1,4 +1,8 @@
+#if defined(ARDUINO) && ARDUINO >= 100
+#include "Arduino.h"
+#else
 #include "WProgram.h"
+#endif
 #include "WandererTrack.h"
 #include "WandererMotor.h"
 #include "Interfaces.h"

@@ -1,14 +1,13 @@
 #include <serialGLCD.h>
-#include <NewSoftSerial.h>
+#include <SoftwareSerial.h>
 #include "JoyStickAdapter.h"
-#include "cppfix.h"
 #include "Common.h"
 
 int CSettings::SystemModeCode;
 int CSettings::SystemModeCode_Current;
 int CSettings::SystemModeCode_Old;
 CJoyStickAdapter * pjsa;
-NewSoftSerial srlXBee(SYSTEM_CON_XBEE_RX, SYSTEM_CON_XBEE_TX);
+SoftwareSerial srlXBee(SYSTEM_CON_XBEE_RX, SYSTEM_CON_XBEE_TX);
 volatile boolean EnterMenu;
 volatile boolean WriteLCD;
 

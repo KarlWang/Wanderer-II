@@ -1,4 +1,8 @@
+#if defined(ARDUINO) && ARDUINO >= 100
+#include "Arduino.h"
+#else
 #include "WProgram.h"
+#endif
 #include "JoyStick.h"
 
 CJoyStick::CJoyStick(int aJoyStick_H_Pin, int aJoyStick_V_Pin)

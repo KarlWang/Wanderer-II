@@ -1,4 +1,8 @@
+#if defined(ARDUINO) && ARDUINO >= 100
+#include "Arduino.h"
+#else
 #include "WProgram.h"
+#endif
 #include "WandererMotor.h"
 
 CWandererMotor::CWandererMotor(int aControlPin1, int aControlPin2, int aPWMPin)
